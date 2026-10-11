@@ -1,0 +1,11 @@
+# conda env with everything Stylet needs, including ffmpeg:
+#   conda env create -f environment.yml && conda activate stylet
+# then check it:  python stylet.py --check
+name: stylet
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - ffmpeg
+  - pyside6
+  - pytest
