@@ -18,7 +18,7 @@ frame rate. It is both the development and the production tool.
 - `stylet.py` — the entry point: `--headless` jobs, or launches the GUI.
 - `braw/` — `braw2pipe.cpp` + `build.sh`: a helper built against the free Blackmagic
   RAW SDK that decodes `.braw` to raw frames *[DD V.10]*. **Not yet compiled or run
-  against real BRAW** (no SDK on the dev machine); the Python side is tested with a fake.
+  against real BRAW** (the SDK has not been installed yet); the Python side is tested with a fake.
 - Layouts (`stylet_core.py`, "Layouts" section): an encode entry may carry
   `"layout"` instead of `"mode"` — `regions` (x/y/w/h or centre cx/cy/w/h) or a
   `grid` (rows, cols, cell size, pitch, offsets, skip), with optional `output`
@@ -41,13 +41,13 @@ exists downstream. If a change seems to require breaking one, stop and ask.
 ## 1. Running
 
 Needs Python with PySide6 (GUI only; headless is standard library) and
-`ffmpeg`/`ffprobe` on the PATH. The system Python here has no PySide6; use a
-conda env that does, e.g.
+`ffmpeg`/`ffprobe` on the PATH. Use any Python environment that has PySide6
+(`pip install PySide6`) for the GUI and the tests:
 
 ```bash
-~/anaconda3/envs/DEEPLABCUT/bin/python stylet.py                    # GUI
-~/anaconda3/envs/DEEPLABCUT/bin/python stylet.py --headless job.json [--dry-run]
-~/anaconda3/envs/DEEPLABCUT/bin/python -m pytest tests/ -q                     # 124 tests
+python stylet.py                    # GUI
+python stylet.py --headless job.json [--dry-run]
+python -m pytest tests/ -q          # 124 tests
 ```
 
 `python stylet.py --check` reports ffmpeg/ffprobe, encoders, NVENC (a real one-frame
